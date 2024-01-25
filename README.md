@@ -20,7 +20,7 @@ Effectively this gives you the ability to write @ rules in your CSS which can ap
 		}
 	}
 	
-	/* You can also add a filter
+	/* You can also add a filter in parens
 	   @media screen, (--crossroot(selector)) {...}
 	
 	   And these rules will only apply to the shadow dom
