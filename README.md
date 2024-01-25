@@ -13,7 +13,7 @@ Effectively this gives you the ability to write @ rules in your CSS which can ap
 	
 	
 	/* Applies to your page *and all shadow roots* */
-	@media screen and (--crossroot) {
+	@media screen, (--crossroot) {
 		h1 {
 			background-color: hotpink;
 			color: white;
@@ -21,21 +21,21 @@ Effectively this gives you the ability to write @ rules in your CSS which can ap
 	}
 	
 	/* You can also add a filter
-	   @media screen and (--crossroot(selector)) {...}
+	   @media screen, (--crossroot(selector)) {...}
 	
 	   And these rules will only apply to the shadow dom
 	   of elements which match that selector...
 	
 	   for example...
 	*/
-	@media screen and (--crossroot(hell-o)) {
+	@media screen, (--crossroot(hell-o)) {
 	  h1 {
 	    font-style: italic;
 	  }
 	}
 	
 	/* Or, if you prefer */
-	@media screen and (--crossroot(:not(hell-o))) {
+	@media screen, (--crossroot(:not(hell-o))) {
 	  h2 {
 	    font-size: 1rem;
 	    font-weight: bold;
@@ -47,7 +47,7 @@ Effectively this gives you the ability to write @ rules in your CSS which can ap
 	/* Finally... you can do the same _without_
 	   having it affect your page too! That is, if you 
 	   want rules that _only_ apply in shadow doms, you
-	   just leave off the "screen and"....*/
+	   just leave off the "screen, "....*/
 	@media --crossroot(hell-o, buh-bye) {
 	  h1 {
 	    border: medium solid limegreen;
