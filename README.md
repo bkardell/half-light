@@ -58,6 +58,6 @@ Effectively this gives you the ability to write @ rules in your CSS which can ap
   <script src="half-light.js"></script>
 ```
 
-Enjoy.. or don't.  [Let me know either way with this emjoji sentiment poll, or a brief comment](https://github.com/bkardell/half-light/issues).
+Enjoy.. or don't.  [Let me know either way with this emjoji sentiment poll, or a brief comment](https://github.com/bkardell/half-light/issues/1).
 
  
