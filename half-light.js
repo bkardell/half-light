@@ -19,7 +19,7 @@
         console.log(rule, rule.type);
         let name = rule.constructor.name;
         let cond = rule.conditionText || "";
-        let globalIntent = cond.startsWith("screen and");
+        let globalIntent = cond.startsWith('screen,');
         let f = cond.match(/(?:--crossroot\({0,1})([^\)]*)/);
 
         if (name === "CSSMediaRule" && (cond === "--crossroot" || f)) {
