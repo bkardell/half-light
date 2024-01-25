@@ -16,7 +16,6 @@
       if (!sheet.ownerNode.matches("head > *")) return;
 
       [...sheet.cssRules].forEach((rule) => {
-        console.log(rule, rule.type);
         let name = rule.constructor.name;
         let cond = rule.conditionText || "";
         let globalIntent = cond.startsWith('screen,');
@@ -67,7 +66,6 @@
     for (let selector in targetedStyles) {
       if (element.matches(selector)) {
         let style = toStyleElement(targetedStyles[selector].join("\n"));
-        console.log(element, style);
         element.shadowRoot.insertBefore(style, endAnchor);
       }
     }
