@@ -11,10 +11,6 @@
 
   function refreshTargetedStyles() {
     targetedStyles = [];
-    let globalFilters =
-      getComputedStyle(document.documentElement).getPropertyValue(
-        "--global-crossroot-layer-filter"
-      ) || "*";
 
     [...document.styleSheets].forEach((sheet) => {
       if (!sheet.ownerNode.matches("head > *")) return;
@@ -22,15 +18,13 @@
       [...sheet.cssRules].forEach((rule) => {
         console.log(rule, rule.type);
         let name = rule.constructor.name;
-        let f = (rule.conditionText || "").match(/(?:--crossroot\()([^\)]*)/);
-        if (
-          (name === "CSSMediaRule" &&
-            (rule.conditionText === "--crossroot" || f)) ||
-          (name == "CSSLayerBlockRule" && rule.name == "--crossroot")
-        ) {
-          [...rule.cssRules].forEach((innerRule) => {
-            let where = f && f.length == 2 ? f[1] : globalFilters;
+        let cond = rule.conditionText || "";
+        let globalIntent = cond.startsWith("screen and");
+        let f = cond.match(/(?:--crossroot\({0,1})([^\)]*)/);
 
+        if (name === "CSSMediaRule" && (cond === "--crossroot" || f)) {
+          [...rule.cssRules].forEach((innerRule) => {
+            let where = f && f.length == 2 && f[1] ? f[1] : "*";
             targetedStyles[where] = targetedStyles[where] || [];
             targetedStyles[where].push(innerRule.cssText);
           });
