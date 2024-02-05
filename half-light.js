@@ -31,10 +31,6 @@ function clearStyles (element) {
   element.shadowRoot.adoptedStyleSheets = []
 }
 
-function maybeSetStyles (element) {
-  setStyles(element)
-}
-
 function setStyles (element) {
   for (selector in targetedStyles) {
     if (element.matches(selector)) {
