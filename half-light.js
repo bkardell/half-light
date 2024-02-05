@@ -8,7 +8,6 @@ function refreshTargetedStyles() {
     if (!sheet.ownerNode.matches("head > *")) return
 
     [...sheet.cssRules].forEach((rule) => {
-      console.log(rule, rule.type)
       let name = rule.constructor.name
       let cond = rule.conditionText || ''
       let globalIntent = cond.startsWith('screen,')
