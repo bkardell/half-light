@@ -1,6 +1,6 @@
 (function() {
 let targetedStyles
-const openStylableElements = new Set())
+const openStylableElements = new Set()
 
 function refreshTargetedStyles() {
   targetedStyles = [];
