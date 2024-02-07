@@ -1,5 +1,6 @@
 # half-light
 Small library for experimenting with ways to tame Shadow DOM in CSS.  See alternatively [shadow-boxing](https://github.com/bkardell/shadow-boxing).
+Here's [a codepen if you'd prefer to see/play with it live](https://codepen.io/briankardell/pen/LYazzmL)
 
 Effectively this gives you the ability to write @ rules in your main page's CSS which can apply into Shadow DOM like...
 
