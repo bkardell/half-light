@@ -1,7 +1,7 @@
 # half-light
 Small library for experimenting with ways to tame Shadow DOM in CSS.  See alternatively [shadow-boxing](https://github.com/bkardell/shadow-boxing).
 
-Effectively this gives you the ability to write @ rules in your CSS which can apply into Shadow DOM like...
+Effectively this gives you the ability to write @ rules in your main page's CSS which can apply into Shadow DOM like...
 
 ```html
 <head>
