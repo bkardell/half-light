@@ -20,7 +20,7 @@ function refreshTargetedStyles() {
 
           let where = (f && f.length == 2 && f[1]) ? f[1] : '*'
           targetedStyles[where] = targetedStyles[where] || new CSSStyleSheet();
-          targetedStyles[where].insertRule(innerRule.cssText)
+          targetedStyles[where].insertRule('@layer {' + innerRule.cssText + '}')
         })
       }
     })
