@@ -1,6 +1,7 @@
 (function() {
 let targetedStyles
 const openStylableElements = new Set()
+const __alreadyAdopted = new WeakMap()
 
 function refreshTargetedStyles() {
   targetedStyles = [];
@@ -33,6 +34,9 @@ function refreshTargetedStyles() {
 
 function clearStyles (element) {
   element.shadowRoot.adoptedStyleSheets = []
+  __alreadyAdopted.get(element).forEach(s => {
+    element.shadowRoot.adoptedStyleSheets.push(s)
+  })
 }
 
 function setStyles (element) {
@@ -64,7 +68,10 @@ let old = Element.prototype.attachShadow
 Element.prototype.attachShadow = function () {
   let r = old.call(this, ...arguments)
   openStylableElements.add(this)
-  Promise.resolve().then(() => setStyles(this))
+  Promise.resolve().then(() => { 
+    __alreadyAdopted.set(this, Array.from(this.shadowRoot.adoptedStyleSheets))
+    setStyles(this)
+  })
   return r
 }
 }())
