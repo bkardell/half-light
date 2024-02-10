@@ -19,12 +19,17 @@ function refreshTargetedStyles() {
         [...rule.cssRules].forEach((innerRule) => {
 
           let where = (f && f.length == 2 && f[1]) ? f[1] : '*'
-          targetedStyles[where] = targetedStyles[where] || new CSSStyleSheet();
-          targetedStyles[where].insertRule(innerRule.cssText)
+          targetedStyles[where] = targetedStyles[where] || []
+          targetedStyles[where].push(innerRule.cssText)  
         })
       }
     })
   })
+  Object.keys(targetedStyles).forEach(where => {
+    let sheet = new CSSStyleSheet();
+    sheet.insertRule('@layer {' + targetedStyles[where].join('\n')  + '}')
+    targetedStyles[where] = sheet
+  })      
 }
 
 function clearStyles (element) {
@@ -32,7 +37,7 @@ function clearStyles (element) {
 }
 
 function setStyles (element) {
-  for (selector in targetedStyles) {
+  for (let selector in targetedStyles) {
     if (element.matches(selector)) {
     element.shadowRoot.adoptedStyleSheets.push(targetedStyles[selector])
     }
