@@ -17,7 +17,6 @@ function refreshTargetedStyles() {
         name === 'CSSMediaRule' && (cond=== "--crossroot" || f) 
       ) {
         [...rule.cssRules].forEach((innerRule) => {
-
           let where = (f && f.length == 2 && f[1]) ? f[1] : '*'
           targetedStyles[where] = targetedStyles[where] || []
           targetedStyles[where].push(innerRule.cssText)  
@@ -27,7 +26,7 @@ function refreshTargetedStyles() {
   })
   Object.keys(targetedStyles).forEach(where => {
     let sheet = new CSSStyleSheet();
-    sheet.insertRule('@layer {' + targetedStyles[where].join('\n')  + '}')
+    sheet.insertRule('@layer shadow-defaults {' + targetedStyles[where].join('\n')  + '}')
     targetedStyles[where] = sheet
   })      
 }
