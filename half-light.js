@@ -39,7 +39,7 @@
     Object.keys(targetedStyles).forEach((where) => {
       let sheet = new CSSStyleSheet();
       sheet.insertRule(
-        "@layer shadow-defaults {" + targetedStyles[where].join("\n") + "}"
+        "@layer --crossroot {" + targetedStyles[where].join("\n") + "}"
       );
       targetedStyles[where] = sheet;
     });
