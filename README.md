@@ -2,8 +2,9 @@
 Small library for experimenting with ways to tame Shadow DOM in CSS.  See alternatively [shadow-boxing](https://github.com/bkardell/shadow-boxing).
 Here's [a codepen if you'd prefer to see/play with it live](https://codepen.io/briankardell/pen/LYazzmL)
 
-Effectively this gives you the ability to write @ rules in your main page's CSS which can apply into Shadow DOM like...
+Effectively this gives you the ability to use Media Queries to provide rules in your main page's CSS which can apply into Shadow DOM.  You can do this in CSS itself, or in `<link>` and `<style>` via the `media=` attribute. 
 
+## In CSS itself...
 ```html
 <head>
   <!-- styles should be in the head, style or link is OK -->
@@ -57,6 +58,19 @@ Effectively this gives you the ability to write @ rules in your main page's CSS 
   </style>
   <!-- include the library, and that's it... -->
   <script src="half-light.js"></script>
+```
+
+## Via `<link media="">` or `<style media="">`
+You can write any of the variants above, but at the stylesheet level upon including it. This allows for authors to specify, for example, that Bootstrap should be adopted by all (or some of) the shadow roots.
+
+Examples..
+
+```
+<link rel="stylesheet" href="../prism.css" media="screen, --crossroot"></link>
+
+<!-- or to target shadows of specific elements, add a selector... -->
+
+<link rel="stylesheet" href="../prism.css" media="screen, (--crossroot x-foo)">&lt;/link>
 ```
 
 ## Component authoring, `adoptedStyleSheets` and `@layers`
