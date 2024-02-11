@@ -74,7 +74,7 @@ Examples..
 ```
 
 ## Component authoring, `adoptedStyleSheets` and `@layers`
-Functionally, the rules that the page injects are in a named layer (`shadow-defaults`), meaning that their specificity isn't really relevant and rules in the component's shadow dom (from `<style>`, `<link>` or `.adoptedStyleSheets`) will automatically win.  However it also means that component authors can begin their styles providing a series of named layers and sandwiching in the `shadow-defaults` layer wherever they prefer, in order to give them even finer grained control. The nice thing about this is that they can list `shadow-defaults` where they'd like it to go, and if no one uses `shadow-defaults`, it just has no effect.  It's potentially a 'softer' way to collaborate.
+Functionally, the rules that the page injects are in a named layer (`--crossroot`), meaning that their specificity isn't really relevant and rules in the component's shadow dom (from `<style>`, `<link>` or `.adoptedStyleSheets`) will automatically win.  However it also means that component authors can begin their styles providing a series of named layers and sandwiching in the `shadow-defaults` layer wherever they prefer, in order to give them even finer grained control. The nice thing about this is that they can list `shadow-defaults` where they'd like it to go, and if no one uses `shadow-defaults`, it just has no effect.  It's potentially a 'softer' way to collaborate.
 
 ## Feedback
 Enjoy.. or don't.  [Let me know either way with this emjoji sentiment poll, or a brief comment](https://github.com/bkardell/half-light/issues/1).
