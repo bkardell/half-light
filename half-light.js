@@ -82,6 +82,7 @@
   let old = Element.prototype.attachShadow;
   Element.prototype.attachShadow = function () {
     let r = old.call(this, ...arguments);
+    if (arguments[0].mode !== 'open') return r; 
     openStylableElements.add(this);
     Promise.resolve().then(() => {
       __alreadyAdopted.set(
