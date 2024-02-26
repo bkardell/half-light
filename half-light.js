@@ -3,18 +3,6 @@
   const openStylableElements = new Set();
   const __alreadyAdopted = new WeakMap();
 
-  function isInDarkRoot(el) {
-    if (el.parentElement) {
-        return isInDarkRoot(el.parentElement)
-    } else if (el.host) {
-        if (el.host.darkened) {
-            return true
-        }
-        return isInDarkRoot(el.host)
-    }
-    return el !== document.documentElement && !el.host 
-  }
-
   function processSheet(rules, where="*") {
      [...rules].forEach((rule) => {
         targetedStyles[where] = targetedStyles[where] || [];
@@ -59,7 +47,7 @@
 
   function clearStyles(element) {
     element.shadowRoot.adoptedStyleSheets = [];
-    (__alreadyAdopted.get(element) || []).forEach((s) => {
+    __alreadyAdopted.get(element).forEach((s) => {
       element.shadowRoot.adoptedStyleSheets.push(s);
     });
   }
@@ -95,11 +83,8 @@
   Element.prototype.attachShadow = function () {
     let r = old.call(this, ...arguments);
     if (arguments[0].mode !== 'open') return r; 
-    requestAnimationFrame(() => {
-      if (isInDarkRoot(r)) {
-        return;
-      }
-      openStylableElements.add(this);
+    openStylableElements.add(this);
+    Promise.resolve().then(() => {
       __alreadyAdopted.set(
         this,
         Array.from(this.shadowRoot.adoptedStyleSheets)
