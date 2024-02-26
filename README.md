@@ -73,6 +73,9 @@ Examples..
 <link rel="stylesheet" href="../prism.css" media="screen, (--crossroot x-foo)">&lt;/link>
 ```
 
+## Closed/Darkend
+half-light will not apply to shadows inside of a closed root.  If you would like to 'block' half-light in descendants in similar fashion, but with an open root, you can set a `.darkened = true` (any truthy value, really) on it. 
+
 ## Component authoring, `adoptedStyleSheets` and `@layers`
 Functionally, the rules that the page injects are in a named layer (`--crossroot`), meaning that their specificity isn't really relevant and rules in the component's shadow dom (from `<style>`, `<link>` or `.adoptedStyleSheets`) will automatically win.  However it also means that component authors can begin their styles providing a series of named layers and sandwiching in the `shadow-defaults` layer wherever they prefer, in order to give them even finer grained control. The nice thing about this is that they can list `shadow-defaults` where they'd like it to go, and if no one uses `shadow-defaults`, it just has no effect.  It's potentially a 'softer' way to collaborate.
 
