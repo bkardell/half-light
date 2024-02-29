@@ -95,6 +95,7 @@
   document.addEventListener("DOMContentLoaded", () => {
     if(script.hasAttribute('disable-live-half-light')) {
       observer.disconnect()
+      openStylableElements.clear()
     }
   })
 
