@@ -92,10 +92,12 @@
   })
   
   let script = document.currentScript;
+  let liveEnabled = false;
   document.addEventListener("DOMContentLoaded", () => {
     if(script.hasAttribute('disable-live-half-light')) {
       observer.disconnect()
       openStylableElements.clear()
+      liveEnabled = false
     }
   })
 
@@ -107,7 +109,9 @@
       if (isInDarkRoot(r)) {
         return;
       }
-      openStylableElements.add(this);
+      if (liveEnabled) {
+        openStylableElements.add(this);
+      }
       __alreadyAdopted.set(
         this,
         Array.from(this.shadowRoot.adoptedStyleSheets)
