@@ -92,7 +92,7 @@
   })
   
   let script = document.currentScript;
-  let liveEnabled = false;
+  let liveEnabled = true;
   document.addEventListener("DOMContentLoaded", () => {
     if(script.hasAttribute('disable-live-half-light')) {
       observer.disconnect()
