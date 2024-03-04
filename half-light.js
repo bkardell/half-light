@@ -33,7 +33,7 @@
   function refreshTargetedStyles() {
     targetedStyles = [];
     [...document.styleSheets].forEach((sheet) => {
-      if (!sheet.ownerNode.matches("head > *")) return;
+      if (!sheet.ownerNode.matches("head > :not([no-half-light])")) return;
 
       let sheetMQResult = parseMQ(sheet.media.mediaText);
       if (sheetMQResult.isCrossRoot) { 
@@ -91,6 +91,16 @@
     });
   })
   
+  let script = document.currentScript;
+  let liveEnabled = true;
+  document.addEventListener("DOMContentLoaded", () => {
+    if(script.hasAttribute('disable-live-half-light')) {
+      observer.disconnect()
+      openStylableElements.clear()
+      liveEnabled = false
+    }
+  })
+
   let old = Element.prototype.attachShadow;
   Element.prototype.attachShadow = function () {
     let r = old.call(this, ...arguments);
@@ -99,7 +109,9 @@
       if (isInDarkRoot(r)) {
         return;
       }
-      openStylableElements.add(this);
+      if (liveEnabled) {
+        openStylableElements.add(this);
+      }
       __alreadyAdopted.set(
         this,
         Array.from(this.shadowRoot.adoptedStyleSheets)
