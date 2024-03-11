@@ -7,7 +7,7 @@
     if (el.parentElement) {
         return isInDarkRoot(el.parentElement)
     } else if (el.host) {
-        if (el.host.darkened || el.host.hasAttribute('darkened')) {
+        if (el.host.hasAttribute('darkened') || el.host.darkened) {
             return true
         }
         return isInDarkRoot(el.host)
